@@ -1,21 +1,20 @@
 import express from 'express'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import App from './components/App'
+import layout from '../views/layout.jade'
 
 var app = express.Router();
 
 app.get('/', function(req, res, next) {
 
-  let content = renderToString(
-      React.createElement('div', null, 'Hello World!');
-  )
-  console.log(content);
+  let element = React.createElement('div', null, 'Hello World!');
+  let content = renderToString(element);
 
-  res.render('index', {
-    title:'Festivalfinder',
-    content:content
-  })
+  res.send(layout({
+    content: content,
+    title: 'Festivalfinder'
+  }));
+
 });
 
 module.exports = app;

@@ -2,8 +2,8 @@ import React from 'react'
 
 export default class App extends React.Component {
     render() {
-      return (
-        <div>Hey</div>
-      )
+        return (
+          <div>Hey</div>
+        )
     }
 }

@@ -8,7 +8,7 @@ var app = express.Router();
 app.get('/', function(req, res, next) {
 
   let content = renderToString(
-      <App></App>
+      React.createElement('div', null, 'Hello World!');
   )
   console.log(content);
 

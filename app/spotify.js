@@ -56,16 +56,21 @@ app.get('/callback', function(req, res) {
         });
 
         var artists = getArtists(access_token, (error,artists) => {
+          var artistsArray = [];
           artists.forEach(function(artist) {
               artist.forEach(function(a) {
                   a.forEach(function(e) {
-                      console.log(e.name);
+                      let artistId = e.id;
+                      var artistImages = getArtistImages(artistId, (error, artistImages) => {
+                        console.log(artistImages);
+                      });
+                      //artistsArray.push(e);
                   })
               })
           });
           let component = renderToString(
               <App>
-                <Table artists={artists}></Table>
+                <Table artists={artistsArray}></Table>
               </App>
           );
 
@@ -139,6 +144,20 @@ function getArtists(access_token, callback) {
         }, function(error,artistsArray) {
           callback(null, artistsArray);
         });
+    });
+}
+
+function getArtistImages(artistId) {
+
+    var options = {
+      url: 'https://api.spotify.com/v1/artists/' + artistId,
+      json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(body && body.images && body.images.length > 0) {
+          return body.images[0].url;
+        }
     });
 }
 

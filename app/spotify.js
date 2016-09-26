@@ -1,4 +1,8 @@
 import express from 'express'
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import Table from './components/Table'
+import App from './components/App'
 var SpotifyAPI = require('../API/spotify.js');
 var querystring = require('querystring');
 var request = require('request');
@@ -7,7 +11,6 @@ var map = require('async/map');
 var app = express.Router();
 
 app.get('/login', function(req, res) {
-
   var scope = 'user-read-private user-read-email';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
@@ -16,7 +19,6 @@ app.get('/login', function(req, res) {
       scope: scope,
       redirect_uri: SpotifyAPI.getSpotifyRedirectURI()
     }));
-
 });
 
 app.get('/callback', function(req, res) {
@@ -54,7 +56,23 @@ app.get('/callback', function(req, res) {
         });
 
         var artists = getArtists(access_token, (error,artists) => {
-          res.send(artists);
+          artists.forEach(function(artist) {
+              artist.forEach(function(a) {
+                  a.forEach(function(e) {
+                      console.log(e.name);
+                  })
+              })
+          });
+          let component = renderToString(
+              <App>
+                <Table artists={artists}></Table>
+              </App>
+          );
+
+          res.send(
+            component
+          )
+
         });
 
       } else {
@@ -119,7 +137,6 @@ function getArtists(access_token, callback) {
               callback(null, artistarray);
           });
         }, function(error,artistsArray) {
-          console.log("response", artistsArray);
           callback(null, artistsArray);
         });
     });

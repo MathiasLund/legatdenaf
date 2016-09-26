@@ -1,18 +1,17 @@
 import express from 'express'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import Layout from './components/Layout'
-import Header from './components/Header'
+import App from './components/App'
+import SpotifyBtn from './components/Button'
 
 var app = express.Router();
 
 app.get('/', function(req, res, next) {
 
   let component = renderToString(
-      <Layout>
-          <Header>
-          </Header>
-      </Layout>
+      <App>
+        <SpotifyBtn></SpotifyBtn>
+      </App>
   );
 
   res.send(

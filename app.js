@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./app/server');
-var spotify = require('./routes/spotify');
+var spotify = require('./app/spotify');
 var users = require('./routes/users');
 
 var app = express();

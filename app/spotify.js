@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express'
 var SpotifyAPI = require('../API/spotify.js');
 var querystring = require('querystring');
 var request = require('request');
-var map = require ('async/map');
+var map = require('async/map');
 
+var app = express.Router();
 
-router.get('/login', function(req, res) {
+app.get('/login', function(req, res) {
 
   var scope = 'user-read-private user-read-email';
   res.redirect('https://accounts.spotify.com/authorize?' +
@@ -19,7 +19,7 @@ router.get('/login', function(req, res) {
 
 });
 
-router.get('/callback', function(req, res) {
+app.get('/callback', function(req, res) {
 
   var code = req.query.code || null;
 
@@ -67,7 +67,7 @@ router.get('/callback', function(req, res) {
 
 });
 
-router.get('/refresh_token', function(req, res) {
+app.get('/refresh_token', function(req, res) {
 
   // requesting access token from refresh token
   var refresh_token = req.query.refresh_token;
@@ -125,4 +125,4 @@ function getArtists(access_token, callback) {
     });
 }
 
-module.exports = router;
+module.exports = app;

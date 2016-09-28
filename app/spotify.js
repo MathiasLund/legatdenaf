@@ -59,7 +59,7 @@ app.get('/callback', function(req, res) {
           //console.log(body);
         });
 
-        var artistsIds = [];
+        /*var artistsIds = [];
         var artistsArray = [];
         getArtists(access_token, (error,artists) => {
             artists.forEach(function(artist) {
@@ -87,10 +87,15 @@ app.get('/callback', function(req, res) {
                 });
             });
 
-        });
+        });*/
+
+        getArtistImages('2WvLeseDGPX1slhmxI59G3')
+          .then(function(res) {
+              console.log(res);
+          })
 
         res.send(
-          component
+          'abe':'abe'
         )
 
       } else {
@@ -149,9 +154,12 @@ function getArtists(access_token, callback) {
 
           request.get(params, function(error, response, body) {
               var tracks = body.items;
-              var artistarray = tracks.map(function(track) {
-                  return track.track.artists;
-              });
+              tracks.forEach(function(artists) {
+                let allArtists = artists.track.artists;
+                var artistarray = allArtists.map(function(artist) {
+                    return artist;
+                });
+              })
               callback(null, artistarray);
           });
         }, function(error,artistsArray) {

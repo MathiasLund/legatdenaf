@@ -8,10 +8,6 @@ export default class Table extends Component {
           <table className="table">
             <tbody>
               {artists.map(artist => {
-                if(i == 10) {
-                  console.log(artist.name);
-                }
-
                 return (
                   <tr>
                     <td key={artist.id}>{artist.name}</td>

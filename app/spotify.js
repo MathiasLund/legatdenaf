@@ -1,3 +1,5 @@
+'use strict';
+
 import express from 'express'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -7,6 +9,7 @@ var SpotifyAPI = require('../API/spotify.js');
 var querystring = require('querystring');
 var request = require('request');
 var map = require('async/map');
+var Q = require('q');
 
 var app = express.Router();
 
@@ -38,7 +41,7 @@ app.get('/callback', function(req, res) {
       json: true
     };
 
-    request.post(authOptions, function(error, response, body) {
+    request.post(authOptions, function(error, response, body,callback) {
       if (!error && response.statusCode === 200) {
 
         var access_token = body.access_token,
@@ -55,30 +58,40 @@ app.get('/callback', function(req, res) {
           //console.log(body);
         });
 
-        var artists = getArtists(access_token, (error,artists) => {
-          var artistsArray = [];
-          artists.forEach(function(artist) {
-              artist.forEach(function(a) {
-                  a.forEach(function(e) {
-                      let artistId = e.id;
-                      var artistImages = getArtistImages(artistId, (error, artistImages) => {
-                        console.log(artistImages);
-                      });
-                      //artistsArray.push(e);
-                  })
-              })
-          });
-          let component = renderToString(
-              <App>
-                <Table artists={artistsArray}></Table>
-              </App>
-          );
+        var artistsIds = [];
+        getArtists(access_token, (error,artists) => {
+            artists.forEach(function(artist) {
+                artist.forEach(function(a) {
+                    a.forEach(function(e) {
+                        let artistId = e.id;
+                        artistsIds.push(artistId);
+                    })
+                })
+            })
 
-          res.send(
-            component
-          )
+            let newImagePromiseArr = artistsIds.map(a => {
+              return getArtistImages(a);
+            });
+
+            Q.all(newImagePromiseArr).done(response => {
+                response.forEach(res => {
+                    console.log(res);
+                });
+            });
 
         });
+
+
+        let component = renderToString(
+            <App>
+
+            </App>
+        );
+
+        res.send(
+          component
+        )
+
 
       } else {
         res.redirect('/#' +
@@ -148,17 +161,21 @@ function getArtists(access_token, callback) {
 }
 
 function getArtistImages(artistId) {
-
+    let deferred = Q.defer();
     var options = {
       url: 'https://api.spotify.com/v1/artists/' + artistId,
       json: true
     };
 
     request.get(options, function(error, response, body) {
-        if(body && body.images && body.images.length > 0) {
-          return body.images[0].url;
+        if(error != null) {
+            deferred.reject(error);
+            return
         }
+        deferred.resolve(body);
     });
+
+    return deferred.promise;
 }
 
 module.exports = app;

@@ -5,6 +5,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import Table from './components/Table'
 import App from './components/App'
+import axios from 'axios'
 var SpotifyAPI = require('../API/spotify.js');
 var querystring = require('querystring');
 var request = require('request');
@@ -41,7 +42,7 @@ app.get('/callback', function(req, res) {
       json: true
     };
 
-    request.post(authOptions, function(error, response, body,callback) {
+    request.post(authOptions, function(error, response, body) {
       if (!error && response.statusCode === 200) {
 
         var access_token = body.access_token,
@@ -59,11 +60,15 @@ app.get('/callback', function(req, res) {
         });
 
         var artistsIds = [];
+        var artistsArray = [];
         getArtists(access_token, (error,artists) => {
             artists.forEach(function(artist) {
                 artist.forEach(function(a) {
                     a.forEach(function(e) {
                         let artistId = e.id;
+                        let name = e.name;
+                        let obj = {};
+                        obj.name = name;
                         artistsIds.push(artistId);
                     })
                 })
@@ -75,23 +80,18 @@ app.get('/callback', function(req, res) {
 
             Q.all(newImagePromiseArr).done(response => {
                 response.forEach(res => {
-                    console.log(res);
+                    if(res.images[0] != undefined) {
+                      let img = res.images[0].url;
+                      console.log(img);
+                    }
                 });
             });
 
         });
 
-
-        let component = renderToString(
-            <App>
-
-            </App>
-        );
-
         res.send(
           component
         )
-
 
       } else {
         res.redirect('/#' +

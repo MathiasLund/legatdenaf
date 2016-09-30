@@ -60,22 +60,14 @@ app.get('/callback', function(req, res) {
         });
 
 
+
         getPlaylists(access_token)
-          .then(function(playlists) {
-              playlists.forEach(function(playlist) {
-                return getArtists(playlist,access_token)
-                  .then(function(artist) {
-                      return artist;
-                  })
-              })
-          }).then(function(artists) {
-            console.log("getting artists",artists);
-              /*artists.forEach(function(artist) {
-                return getArtistImages(artist.id)
-              })*/
-          }).catch(function(error) {
-              console.log(error);
-          })
+          .then(playlists => Promise.all(playlists.map(playlist =>
+              getArtists(playlist, access_token)))
+          .then(artists => {
+              console.log(artists);
+        }));
+
 
         res.send(
           'abe':'abe'

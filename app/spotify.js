@@ -59,39 +59,22 @@ app.get('/callback', function(req, res) {
           //console.log(body);
         });
 
-        /*var artistsIds = [];
-        var artistsArray = [];
-        getArtists(access_token, (error,artists) => {
-            artists.forEach(function(artist) {
-                artist.forEach(function(a) {
-                    a.forEach(function(e) {
-                        let artistId = e.id;
-                        let name = e.name;
-                        let obj = {};
-                        obj.name = name;
-                        artistsIds.push(artistId);
-                    })
-                })
-            })
 
-            let newImagePromiseArr = artistsIds.map(a => {
-              return getArtistImages(a);
-            });
-
-            Q.all(newImagePromiseArr).done(response => {
-                response.forEach(res => {
-                    if(res.images[0] != undefined) {
-                      let img = res.images[0].url;
-                      console.log(img);
-                    }
-                });
-            });
-
-        });*/
-
-        getArtistImages('2WvLeseDGPX1slhmxI59G3')
-          .then(function(res) {
-              console.log(res);
+        getPlaylists(access_token)
+          .then(function(playlists) {
+              playlists.forEach(function(playlist) {
+                return getArtists(playlist,access_token)
+                  .then(function(artist) {
+                      return artist;
+                  })
+              })
+          }).then(function(artists) {
+            console.log("getting artists",artists);
+              /*artists.forEach(function(artist) {
+                return getArtistImages(artist.id)
+              })*/
+          }).catch(function(error) {
+              console.log(error);
           })
 
         res.send(
@@ -132,58 +115,86 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-function getArtists(access_token, callback) {
+function getPlaylists(access_token) {
 
-    var options = {
-      url: 'https://api.spotify.com/v1/me/playlists',
-      headers: { 'Authorization': 'Bearer ' + access_token },
-      json: true
-    };
+  var options = {
+    url: 'https://api.spotify.com/v1/me/playlists',
+    headers: { 'Authorization': 'Bearer ' + access_token },
+    json: true
+  };
 
-    request.get(options, function(error, response, body) {
-        var playlists = body.items;
-        map(playlists, function(playlist,callback) {
-          var name = playlist.name;
-          var url = playlist.tracks.href;
+  return new Promise(function(resolve, reject) {
 
-          var params = {
-            url: url,
-            headers: { 'Authorization': 'Bearer ' + access_token },
-            json: true
-          };
+      request.get(options, function(error, response, body) {
+          var playlists = body.items;
+          var playlistArray = [];
+          playlists.forEach(function(playlist) {
+            var name = playlist.name;
+            var url = playlist.tracks.href;
 
-          request.get(params, function(error, response, body) {
-              var tracks = body.items;
-              tracks.forEach(function(artists) {
-                let allArtists = artists.track.artists;
-                var artistarray = allArtists.map(function(artist) {
-                    return artist;
-                });
-              })
-              callback(null, artistarray);
+            playlistArray.push(url);
           });
-        }, function(error,artistsArray) {
-          callback(null, artistsArray);
-        });
+
+          if(!error) {
+            resolve(playlistArray);
+          } else {
+            reject(error);
+          }
+
+      });
+
+  });
+}
+
+function getArtists(url,access_token) {
+
+  var params = {
+    url: url,
+    headers: { 'Authorization': 'Bearer ' + access_token },
+    json: true
+  };
+
+  return new Promise(function(resolve, reject) {
+
+    request.get(params, function(error, response, body) {
+
+        var tracks = body.items;
+        var artistArray = [];
+        tracks.forEach(function(artists) {
+          let allArtists = artists.track.artists;
+          allArtists.forEach(function(artist) {
+              artistArray.push(artist);
+          });
+        })
+
+        if(!error) {
+          resolve(artistArray);
+        } else {
+          reject(error);
+        }
+
     });
+
+  })
+
 }
 
 function getArtistImages(artistId) {
-    let deferred = Q.defer();
     var options = {
       url: 'https://api.spotify.com/v1/artists/' + artistId,
       json: true
     };
 
-    request.get(options, function(error, response, body) {
-        if(error != null) {
-            deferred.reject(error);
-            return
-        }
-        deferred.resolve(body);
-    });
+    return new Promise(function(resolve, reject) {
+      request.get(options, function(error, response, body) {
+          if(error != null) {
+              reject(error);
+          } else {
+              resolve(body);
+          }
+      });
+    })
 
-    return deferred.promise;
 }
 
 module.exports = app;

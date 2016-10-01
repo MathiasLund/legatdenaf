@@ -60,25 +60,6 @@ app.get('/callback', function(req, res) {
         });
 
 
-
-        /*getPlaylists(access_token)
-          .then(playlists => Promise.all(playlists.map(playlist => {
-            getArtists(playlist, access_token)
-          })))
-          .then(artists => Promise.all(artists.map(artist => {
-            console.log(artist)
-          })))*/
-
-          /*getPlaylists(access_token)
-            .then(playlists => Promise.all(playlists.map(playlist => {
-              getArtists(playlist, access_token)
-            })))
-            .then(artists => {
-                console.log(artists);
-            })*/
-
-
-
         getPlaylists(access_token)
           .then(playlists => Promise.all(playlists.map(playlist =>
             getArtists(playlist, access_token)))
@@ -86,15 +67,25 @@ app.get('/callback', function(req, res) {
             artists.map(artist => {
               Promise.all(artist.map(a =>
                 getArtistImages(a.id)))
-              .then(response => {
+              .then(response => response.map(result => {
+                  console.log(result);
+
+
                 res.send(
-                  response
+                  'result':'as'
                 )
+
+              })).catch(err => {
+                console.error(err);
               })
             })
-          }));
+          })).catch(err => {
+            console.error(err);
+          });
 
-
+          res.send(
+            'ju':'ju'
+          )
 
       } else {
         res.redirect('/#' +

@@ -64,14 +64,13 @@ app.get('/callback', function(req, res) {
           .then(playlists => Promise.all(playlists.map(playlist =>
             getArtists(playlist, access_token)))
           .then(artists => {
+
             artists.map(artist => {
-              Promise.all(artist.map(a =>
-                getArtistImages(a.id)))
-              .then(response => response.map(results => {
-                console.log(results.length);
+              Promise.all(artist.map(a => {return a}))
+              .then(result => {
                 let component = renderToString(
                     <App>
-                        <Table artists={results} />
+                        <Table artists={result} />
                     </App>
                 );
 
@@ -79,11 +78,10 @@ app.get('/callback', function(req, res) {
                   component
                 )
 
-              }))
+              })
             })
-          })).catch(err => {
-            console.error(err);
-          });
+
+          }));
 
           /*res.send(
             'ju':'123'
@@ -170,9 +168,9 @@ function getArtists(url,access_token) {
         var artistArray = [];
         tracks.forEach(function(artists) {
           let allArtists = artists.track.artists;
-          allArtists.forEach(function(artist) {
-              artistArray.push(artist);
-          });
+            allArtists.map(items => {
+              artistArray.push(items);
+            })
         })
 
         if(!error) {

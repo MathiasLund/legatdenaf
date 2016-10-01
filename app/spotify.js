@@ -67,25 +67,27 @@ app.get('/callback', function(req, res) {
             artists.map(artist => {
               Promise.all(artist.map(a =>
                 getArtistImages(a.id)))
-              .then(response => response.map(result => {
-                  console.log(result);
-
+              .then(response => response.map(results => {
+                console.log(results.length);
+                let component = renderToString(
+                    <App>
+                        <Table artists={results} />
+                    </App>
+                );
 
                 res.send(
-                  'result':'as'
+                  component
                 )
 
-              })).catch(err => {
-                console.error(err);
-              })
+              }))
             })
           })).catch(err => {
             console.error(err);
           });
 
-          res.send(
-            'ju':'ju'
-          )
+          /*res.send(
+            'ju':'123'
+          )*/
 
       } else {
         res.redirect('/#' +

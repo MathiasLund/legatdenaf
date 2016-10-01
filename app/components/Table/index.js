@@ -5,7 +5,8 @@ export default class Table extends Component {
       const {artists} = this.props;
       let i = 0;
         return (
-          <table className="table">
+          <div>{JSON.stringify(artists)}</div>
+        /*  <table className="table">
             <tbody>
               {artists.map(artist => {
                 return (
@@ -15,7 +16,7 @@ export default class Table extends Component {
                 )
               })}
             </tbody>
-          </table>
+          </table>*/
         )
     }
 }

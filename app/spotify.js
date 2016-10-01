@@ -61,17 +61,46 @@ app.get('/callback', function(req, res) {
 
 
 
+        /*getPlaylists(access_token)
+          .then(playlists => Promise.all(playlists.map(playlist => {
+            getArtists(playlist, access_token)
+          })))
+          .then(artists => Promise.all(artists.map(artist => {
+            console.log(artist)
+          })))*/
+
+          /*getPlaylists(access_token)
+            .then(playlists => Promise.all(playlists.map(playlist => {
+              getArtists(playlist, access_token)
+            })))
+            .then(artists => {
+                console.log(artists);
+            })*/
+
+
+
         getPlaylists(access_token)
           .then(playlists => Promise.all(playlists.map(playlist =>
-              getArtists(playlist, access_token)))
+            getArtists(playlist, access_token)))
           .then(artists => {
-              console.log(artists);
-        }));
+            artists.map(artist => {
+              Promise.all(artist.map(a =>
+                getArtistImages(a.id)))
+              .then((res) => {
+                res.forEach(function(e) {
+                  if(e.images) {
+                    let img = e.images[0].url;
 
+                    res.send(
+                      'data':img
+                    )
+                    
+                  }
+                })
 
-        res.send(
-          'abe':'abe'
-        )
+              })
+            })
+          }));
 
       } else {
         res.redirect('/#' +

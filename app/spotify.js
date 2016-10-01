@@ -86,21 +86,15 @@ app.get('/callback', function(req, res) {
             artists.map(artist => {
               Promise.all(artist.map(a =>
                 getArtistImages(a.id)))
-              .then((res) => {
-                res.forEach(function(e) {
-                  if(e.images) {
-                    let img = e.images[0].url;
-
-                    res.send(
-                      'data':img
-                    )
-                    
-                  }
-                })
-
+              .then(response => {
+                res.send(
+                  response
+                )
               })
             })
           }));
+
+
 
       } else {
         res.redirect('/#' +

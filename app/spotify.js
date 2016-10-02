@@ -65,11 +65,11 @@ app.get('/callback', function(req, res) {
             getArtists(playlist, access_token)))
           .then(artists => {
             countOccurrencesOfArtists(artists)
-            .then(counts => {
-                
+            .then(artistsArray => {
+
               let component = renderToString(
                   <App>
-                      <Table artists={artists} count={count} />
+                      <Table artists={artistsArray} />
                   </App>
               );
 
@@ -203,11 +203,20 @@ function getArtistImages(artistId) {
 
 function countOccurrencesOfArtists(artists) {
     return new Promise(function(resolve, reject) {
-        var counts = {};
         artists.map(artist => {
-          artist.forEach(function(a) { counts[a.id] = (counts[a.id] || 0)+1; });
+          artist.forEach(function(a) {
+
+
+            var obj = artist.filter(ar => a.id === ar.id).length;
+
+            console.log(a.name + " " + obj);
+
+            //a.count = i;
+
+            //counts[a.id] = (counts[a.id] || 0)+1;
+          });
         })
-        resolve(counts);
+        resolve(artists);
     })
 }
 

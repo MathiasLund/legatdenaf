@@ -66,11 +66,14 @@ app.get('/callback', function(req, res) {
           .then(artists => {
 
             artists.map(artist => {
-              Promise.all(artist.map(a => {return a}))
+              Promise.all(artist.map(a => {
+                  arr.push(a);
+              }))
               .then(result => {
+                console.log(result);
                 let component = renderToString(
                     <App>
-                        <Table artists={result} />
+
                     </App>
                 );
 

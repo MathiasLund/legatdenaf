@@ -3,11 +3,12 @@ import React, { Component } from 'react'
 export default class Table extends Component {
     render() {
       const {artists} = this.props;
+      const {count} = this.props;
       let i = 0;
         return (
           <table className="table">
             <tbody>
-
+            {JSON.stringify(count)}
               {artists.map(artist => {
                 return (
                   artist.map(a => {
@@ -18,7 +19,7 @@ export default class Table extends Component {
                     )
                   })
                 )
-                
+
               })}
 
             </tbody>

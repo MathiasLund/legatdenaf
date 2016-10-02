@@ -64,22 +64,26 @@ app.get('/callback', function(req, res) {
           .then(playlists => Promise.all(playlists.map(playlist =>
             getArtists(playlist, access_token)))
           .then(artists => {
+            countOccurrencesOfArtists(artists)
+            .then(counts => {
+                
+              let component = renderToString(
+                  <App>
+                      <Table artists={artists} count={count} />
+                  </App>
+              );
 
-                let component = renderToString(
-                    <App>
-                        <Table artists={artists} />
-                    </App>
-                );
+              res.send(
+                component
+              )
 
-                res.send(
-                  component
-                )
 
-          }));
+            }).catch(err => {
+              console.error(err);
+            })
+          }
 
-          /*res.send(
-            'ju':'123'
-          )*/
+          ));
 
       } else {
         res.redirect('/#' +
@@ -195,6 +199,16 @@ function getArtistImages(artistId) {
       });
     })
 
+}
+
+function countOccurrencesOfArtists(artists) {
+    return new Promise(function(resolve, reject) {
+        var counts = {};
+        artists.map(artist => {
+          artist.forEach(function(a) { counts[a.id] = (counts[a.id] || 0)+1; });
+        })
+        resolve(counts);
+    })
 }
 
 module.exports = app;

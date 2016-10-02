@@ -65,24 +65,15 @@ app.get('/callback', function(req, res) {
             getArtists(playlist, access_token)))
           .then(artists => {
 
-            artists.map(artist => {
-              Promise.all(artist.map(a => {
-                  arr.push(a);
-              }))
-              .then(result => {
-                console.log(result);
                 let component = renderToString(
                     <App>
-
+                        <Table artists={artists} />
                     </App>
                 );
 
                 res.send(
                   component
                 )
-
-              })
-            })
 
           }));
 

@@ -60,7 +60,7 @@ app.get('/callback', function(req, res) {
         });
 
 
-        getPlaylists(access_token)
+        /*getPlaylists(access_token)
           .then(playlists => Promise.all(playlists.map(playlist =>
             getArtists(playlist, access_token)))
           .then(artists => {
@@ -81,7 +81,27 @@ app.get('/callback', function(req, res) {
             }).catch(err => {
               console.error(err);
             })
-          }
+          }*/
+
+          getPlaylists(access_token)
+            .then(playlists => Promise.all(playlists.map(playlist =>
+              getArtists(playlist, access_token)))
+            .then(artists => {
+              let artistsObj = countOccurrencesOfArtists(artists, (error,response) => {
+                  return response
+              })
+
+              let component = renderToString(
+                  <App>
+                      <Table artists={artistsObj} />
+                  </App>
+              );
+
+              res.send(
+                component
+              )
+
+            }
 
           ));
 
@@ -202,22 +222,23 @@ function getArtistImages(artistId) {
 }
 
 function countOccurrencesOfArtists(artists) {
-    return new Promise(function(resolve, reject) {
-        artists.map(artist => {
-          artist.forEach(function(a) {
 
+   let countedArtists = {};
+      artists.map(artist => {
+        artist.forEach(function(a) {
+          let id = a.id;
+          let countedArtist = countedArtists[id];
 
-            var obj = artist.filter(ar => a.id === ar.id).length;
+          if(!countedArtist) {
+            countedArtists[id] = {name:a.name,id:a.id,count:1}
+          } else {
+            countedArtist.count++;
+          }
 
-            console.log(a.name + " " + obj);
+        });
+      })
 
-            //a.count = i;
-
-            //counts[a.id] = (counts[a.id] || 0)+1;
-          });
-        })
-        resolve(artists);
-    })
+    return countedArtists;
 }
 
 module.exports = app;

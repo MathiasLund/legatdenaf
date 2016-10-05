@@ -59,41 +59,17 @@ app.get('/callback', function(req, res) {
           //console.log(body);
         });
 
-
-        /*getPlaylists(access_token)
-          .then(playlists => Promise.all(playlists.map(playlist =>
-            getArtists(playlist, access_token)))
-          .then(artists => {
-            countOccurrencesOfArtists(artists)
-            .then(artistsArray => {
-
-              let component = renderToString(
-                  <App>
-                      <Table artists={artistsArray} />
-                  </App>
-              );
-
-              res.send(
-                component
-              )
-
-
-            }).catch(err => {
-              console.error(err);
-            })
-          }*/
-
           getPlaylists(access_token)
             .then(playlists => Promise.all(playlists.map(playlist =>
               getArtists(playlist, access_token)))
             .then(artists => {
-              let artistsObj = countOccurrencesOfArtists(artists, (error,response) => {
+              let artistsArray = countOccurrencesOfArtists(artists, (error,response) => {
                   return response
               })
 
               let component = renderToString(
                   <App>
-                      <Table artists={artistsObj} />
+                      <Table artists={artistsArray} />
                   </App>
               );
 
@@ -234,11 +210,19 @@ function countOccurrencesOfArtists(artists) {
           } else {
             countedArtist.count++;
           }
-
         });
       })
 
-    return countedArtists;
+    let artistsArray = [];
+    for(var key in countedArtists) {
+      var obj = {};
+      obj.id = countedArtists[key].id;
+      obj.name = countedArtists[key].name;
+      obj.count = countedArtists[key].count;
+      artistsArray.push(obj);
+    }
+
+    return artistsArray;
 }
 
 module.exports = app;

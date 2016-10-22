@@ -56,11 +56,11 @@ export default class Homepage extends Component {
                   </p>
                   <div className="row">
                     <div className="col-sm-6">
-                      <button className="btn btn-block">Sign up & get started</button>
+                      <button className="btn btn-block btn-dark">Sign up & get started</button>
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-3 col-sm-offset-3">
+                <div className="col-sm-4 col-sm-offset-2">
                   <FestivalCard />
                 </div>
               </div>
@@ -92,6 +92,30 @@ export default class Homepage extends Component {
               </div>
               <div className="col-sm-3">
                 Rock
+              </div>
+            </div>
+          </div>
+
+          <div className="wrapper browse-header">
+            <div className="container">
+              <h3>
+                Popular festivals
+              </h3>
+            </div>
+          </div>
+
+          <div className="wrapper browse">
+            <div className="container">
+              <div className="row">
+                <div className="col-sm-4">
+                  <FestivalCard />
+                </div>
+                <div className="col-sm-4">
+                  <FestivalCard />
+                </div>
+                <div className="col-sm-4">
+                  <FestivalCard />
+                </div>
               </div>
             </div>
           </div>

@@ -1,10 +1,6 @@
 'use strict';
 
 import express from 'express'
-import React from 'react'
-import { renderToString } from 'react-dom/server'
-import Table from './components/Table'
-import App from './components/App'
 import axios from 'axios'
 var SpotifyAPI = require('../API/spotify.js');
 var querystring = require('querystring');
@@ -66,7 +62,7 @@ app.get('/spotify/callback', function(req, res) {
               let artistsArray = countOccurrencesOfArtists(artists, (error,response) => {
                   return response
               })
-
+              /*
               let component = renderToString(
                   <App>
                       <Table artists={artistsArray} />
@@ -75,7 +71,7 @@ app.get('/spotify/callback', function(req, res) {
 
               res.send(
                 component
-              )
+              )*/
 
             }
 

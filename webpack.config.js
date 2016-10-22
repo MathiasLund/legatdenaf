@@ -1,22 +1,45 @@
-var path = require('path');
-var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+function getDevTool() {
+    if (process.env.NODE_ENV !== 'production') {
+        return 'source-map'; //enables source map
+    }
+
+    return false;
+}
+
 module.exports = {
-    entry: './app/client.js',
+    entry: {
+        main: './app/client.js'
+    },
     output: {
-    path: __dirname + '/public/js/build', filename: 'main.build.js' },
+        filename: './dist/scripts/[name].js'
+    },
+    devtool: getDevTool(),
     module: {
         loaders: [
             {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'react-hot'
+            },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel',
+                query: {
+                    presets: ['react', 'es2015']
+                }
+            },
+            {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract(
-                  "style",
-                  "css!sass")
+                loader: ExtractTextPlugin.extract('css!sass')
             }
         ]
     },
     plugins: [
-        new ExtractTextPlugin('abe.css')
+        new ExtractTextPlugin('dist/styles/main.css', {
+            allChunks: true
+        })
     ]
 };

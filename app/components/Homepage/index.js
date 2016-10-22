@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap';
+import SpotifyBtn from './SpotifyBtn'
 
-export default class SpotifyBtn extends Component {
+export default class Homepage extends Component {
     render() {
         return (
           <div className="container">
@@ -27,16 +28,10 @@ export default class SpotifyBtn extends Component {
               <div className="col-md-12">
                 <div clasName="row cta-group">
                   <div className="col-sm-3 col-sm-offset-3">
-                    <Button className="btn btn-lg" href="/spotify/login" bsStyle="success">
-                      <i className="fa fa-spotify"></i>
-                      Login with Spotify
-                    </Button>
+                    
                   </div>
                   <div className="col-sm-3">
-                    <Button className="btn btn-lg" href="/spotify/login" bsStyle="success">
-                      <i className="fa fa-spotify"></i>
-                      Login with Apple Music
-                    </Button>
+
                   </div>
                 </div>
               </div>

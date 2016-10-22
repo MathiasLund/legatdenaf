@@ -1,2 +1,4 @@
 import App from './components/App'
-import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import Table from './components/Table'
+
+require('./components/Table/styles.scss')

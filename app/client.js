@@ -2,19 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
 import App from './components/App'
+import About from './components/About'
+import Home from './components/Home'
 import SpotifyBtn from './components/Button'
-
-class Home extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Home</h1>
-        <SpotifyBtn />
-        <Link to="/about">Link</Link>
-      </div>
-    )
-  }
-}
 
 
 ReactDOM.render(

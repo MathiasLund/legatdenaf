@@ -68,31 +68,29 @@ export default class Homepage extends Component {
           </div>
 
           <div className="wrapper music-boxes">
-            <div className="row">
-              <div className="col-sm-3">
-                Rock
-              </div>
-              <div className="col-sm-3">
-                Rock
-              </div>
-              <div className="col-sm-3">
-                Rock
-              </div>
-              <div className="col-sm-3">
-                Rock
-              </div>
-              <div className="col-sm-3">
-                Rock
-              </div>
-              <div className="col-sm-3">
-                Rock
-              </div>
-              <div className="col-sm-3">
-                Rock
-              </div>
-              <div className="col-sm-3">
-                Rock
-              </div>
+            <div className="col-sm-3">
+              Rock
+            </div>
+            <div className="col-sm-3">
+              Rock
+            </div>
+            <div className="col-sm-3">
+              Rock
+            </div>
+            <div className="col-sm-3">
+              Rock
+            </div>
+            <div className="col-sm-3">
+              Rock
+            </div>
+            <div className="col-sm-3">
+              Rock
+            </div>
+            <div className="col-sm-3">
+              Rock
+            </div>
+            <div className="col-sm-3">
+              Rock
             </div>
           </div>
 

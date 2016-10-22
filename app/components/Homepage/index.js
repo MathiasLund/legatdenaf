@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Button } from 'react-bootstrap';
-import SpotifyBtn from './SpotifyBtn'
+import { Button } from 'react-bootstrap'
+import SpotifyBtn from '../SpotifyBtn'
 
 export default class Homepage extends Component {
     render() {
@@ -28,7 +28,7 @@ export default class Homepage extends Component {
               <div className="col-md-12">
                 <div clasName="row cta-group">
                   <div className="col-sm-3 col-sm-offset-3">
-                    
+
                   </div>
                   <div className="col-sm-3">
 

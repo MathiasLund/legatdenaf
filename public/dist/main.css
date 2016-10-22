@@ -1,0 +1,21 @@
+.app-components-Table-style---Blogposts---3JWNp {
+  margin: 0 0 50px;
+}
+.app-components-Table-style---Post---3ARGh {
+  margin: 20px 0;
+  border-left: 5px solid #1f8dd6;
+  padding-left: 10px;
+}
+.app-components-Table-style---Header---iEpwF {
+  margin: 0;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.app-components-Table-style---Date---2GFMn {
+  font-style: italic;
+  color: black;
+  opacity: 0.8;
+}
+
+/*# sourceMappingURL=main.css.map*/

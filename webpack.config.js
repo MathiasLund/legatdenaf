@@ -13,7 +13,7 @@ module.exports = {
         main: './app/client.js'
     },
     output: {
-        filename: './dist/scripts/[name].js'
+        filename: './public/dist/[name].js'
     },
     devtool: getDevTool(),
     module: {
@@ -32,13 +32,16 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('css!sass')
-            }
+                test: /\.s?css$/,
+                loader: ExtractTextPlugin.extract(
+                  'style',
+                  'css?modules&localIdentName=[path][name]---[local]---[hash:base64:5]!postcss-loader'
+                )
+          }
         ]
     },
     plugins: [
-        new ExtractTextPlugin('dist/styles/main.css', {
+        new ExtractTextPlugin('./public/dist/main.css', {
             allChunks: true
         })
     ]

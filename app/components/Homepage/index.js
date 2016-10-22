@@ -1,42 +1,102 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import SpotifyBtn from '../SpotifyBtn'
+import FestivalCard from '../FestivalCard'
 
 export default class Homepage extends Component {
     render() {
         return (
-          <div className="container">
-            <div className="row header">
-              <div className="logo pull-left">
-                Logo
+<div>
+          <div className="wrapper hero">
+            <div className="container">
+
+              <div className="row header">
+                <div className="logo pull-left">
+                  Logo
+                </div>
+                <div className="logo pull-right">
+                  Browse Login
+                </div>
               </div>
-              <div className="logo pull-right">
-                Browse Login
+
+              <div className="row main-body">
+                <div className="col-md-8 col-md-offset-2">
+                  <h1 className="text-white text-center">
+                    Find the perfect festival.
+                    <br/>
+                    Scan your music.
+                  </h1>
+                  <h4 className="text-white text-center">
+                    Plug in your music streaming app and we’ll do all the work
+                  </h4>
+                </div>
               </div>
+
+              <div className="row cta-group">
+                <div className="col-sm-3 col-sm-offset-3">
+                  <SpotifyBtn />
+                </div>
+                <div className="col-sm-3">
+                  <SpotifyBtn />
+                </div>
+              </div>
+
             </div>
-            <div className="row main-body">
-              <div className="col-md-8 col-md-offset-2">
-                <div className="h1 text-white text-center">
-                  Find the perfect festival.
-                  <br/>
-                  Scan your music.
-                </div>
-                <div className="p text-white text-center">
-                  Plug in your music streaming app and we’ll do all the work
-                </div>
-              </div>
-              <div className="col-md-12">
-                <div clasName="row cta-group">
-                  <div className="col-sm-3 col-sm-offset-3">
+          </div>
 
+          <div className="wrapper section-2">
+            <div className="container">
+              <div className="row">
+                <div className="col-sm-6">
+                  <h2>
+                    Tailor your festival experience
+                  </h2>
+                  <p className="xl">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </p>
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <button className="btn btn-block">Sign up & get started</button>
+                    </div>
                   </div>
-                  <div className="col-sm-3">
-
-                  </div>
+                </div>
+                <div className="col-sm-3 col-sm-offset-3">
+                  <FestivalCard />
                 </div>
               </div>
             </div>
           </div>
+
+          <div className="wrapper music-boxes">
+            <div className="row">
+              <div className="col-sm-3">
+                Rock
+              </div>
+              <div className="col-sm-3">
+                Rock
+              </div>
+              <div className="col-sm-3">
+                Rock
+              </div>
+              <div className="col-sm-3">
+                Rock
+              </div>
+              <div className="col-sm-3">
+                Rock
+              </div>
+              <div className="col-sm-3">
+                Rock
+              </div>
+              <div className="col-sm-3">
+                Rock
+              </div>
+              <div className="col-sm-3">
+                Rock
+              </div>
+            </div>
+          </div>
+
+</div>
         )
     }
 }

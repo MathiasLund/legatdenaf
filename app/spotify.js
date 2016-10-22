@@ -14,7 +14,7 @@ var Q = require('q');
 
 var app = express.Router();
 
-app.get('/login', function(req, res) {
+app.get('/spotify/login', function(req, res) {
   var scope = 'user-read-private user-read-email';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
@@ -25,7 +25,7 @@ app.get('/login', function(req, res) {
     }));
 });
 
-app.get('/callback', function(req, res) {
+app.get('/spotify/callback', function(req, res) {
 
   var code = req.query.code || null;
 
@@ -91,7 +91,7 @@ app.get('/callback', function(req, res) {
 
 });
 
-app.get('/refresh_token', function(req, res) {
+app.get('/spotify/refresh_token', function(req, res) {
 
   // requesting access token from refresh token
   var refresh_token = req.query.refresh_token;

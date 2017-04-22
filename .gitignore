@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 node_modules/
 npm-debug.log
 public/dist/
 dist
+=======
+node_modules
+>>>>>>> 0fa36bbda5be323fd83999daa7644421ec90d47b

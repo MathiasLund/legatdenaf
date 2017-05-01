@@ -1,3 +1,18 @@
 .hero {
-  background-color: blue;
+  padding: 30px;
+}
+
+.boxes {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.info-box {
+  border-style: solid;
+  border-color: #b94a48;
+}
+
+.cta {
+  text-align: center;
 }

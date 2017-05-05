@@ -2,6 +2,13 @@
   padding: 30px;
 }
 
+.bg {
+  background-image: url('https://static.pexels.com/photos/31905/pexels-photo.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
 .boxes {
   margin-top: 100px;
   display: flex;
@@ -11,6 +18,8 @@
 .info-box {
   border-style: solid;
   border-color: #b94a48;
+  height: 500px;
+  color: #fff;
 }
 
 .cta {

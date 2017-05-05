@@ -6,12 +6,12 @@ import Nav from '../Nav'
 export default class Homepage extends Component {
     render() {
         return (
-        <div>
+        <div className="bg">
           <Nav />
           <div className="wrapper hero">
             <div className="row boxes">
               <div className="col-lg-6 info-box">
-                <h3>Info</h3>
+                <h3>Udvekslingslegater</h3>
                 <p>
                 Banker udveksling på døren, og har du styr på finanserne? Vores overskuelige løsning giver dig et hurtigt og personligt overblik over, hvilke legater DU kan søge.
                 Vores løsning har hjulpet tusinder af studerende igennem legatsøgning – og skaffet de studerende over 10 millioner kroner i legater.

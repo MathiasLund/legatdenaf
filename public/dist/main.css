@@ -12,6 +12,19 @@
 
 .cta {
   text-align: center; }
+.nav {
+  background-color: #66D379; }
+
+.title {
+  color: #fff;
+  margin: 25px;
+  display: inline-block; }
+
+.home {
+  display: inline-block;
+  float: right;
+  color: #fff;
+  margin: 20px; }
 .step1 {
   width: 33%; }
 

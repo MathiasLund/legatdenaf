@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import styles from './style.scss'
+import Nav from '../Nav'
 
 export default class Homepage extends Component {
     render() {
         return (
         <div>
+          <Nav />
           <div className="wrapper hero">
-            <div className="row nav">
-              <h1>Legatudvekslingsøgningforstuderendeidanmark.dk</h1>
-            </div>
             <div className="row boxes">
               <div className="col-lg-6 info-box">
                 <h3>Info</h3>

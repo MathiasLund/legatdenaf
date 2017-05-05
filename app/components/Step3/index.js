@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import styles from './style.scss'
 import ProgressBar from '../ProgressBar'
 import Header from '../Header'
+import Map from '../Map'
 
 export default class Step3 extends Component {
     render() {
@@ -11,6 +12,11 @@ export default class Step3 extends Component {
           <div className="container">
             <ProgressBar step={"step3"} />
             <Header title={"Hvor skal du på udveksling?"} />
+
+            <div className="row map">
+              <Map />
+            </div>
+
           </div>
         </div>
         )

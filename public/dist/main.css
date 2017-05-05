@@ -37,5 +37,12 @@
 .header-title {
   text-align: center;
   margin: 40px; }
+.list-row {
+  border-style: solid;
+  border-color: #BDBDBD;
+  margin-bottom: 10px; }
+.map {
+  text-align: center;
+  margin-top: 60px; }
 
 /*# sourceMappingURL=main.css.map*/

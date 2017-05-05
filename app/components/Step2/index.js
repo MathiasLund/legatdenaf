@@ -17,13 +17,13 @@ export default class Step2 extends Component {
               <List title={"Økonomi og matematik"} />
             </div>
             <div className="row">
-              <List title={"Økonomi og matematik"} />
+              <List title={"Business og IT"} />
             </div>
             <div className="row">
-              <List title={"Økonomi og matematik"} />
+              <List title={"Jura"} />
             </div>
             <div className="row">
-              <List title={"Økonomi og matematik"} />
+              <List title={"Teologi"} />
             </div>
 
           </div>

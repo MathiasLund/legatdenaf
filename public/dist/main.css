@@ -54,8 +54,23 @@
   border-style: solid;
   border-color: #BDBDBD;
   margin-bottom: 10px; }
+
+.deadline {
+  margin-top: -36px;
+  margin-right: 14px;
+  float: right; }
 .map {
   text-align: center;
   margin-top: 60px; }
+.wrapper {
+  margin-top: 50px; }
+
+.titles {
+  margin-bottom: 10px; }
+  .titles h3 {
+    display: inline; }
+    .titles h3.right {
+      float: right;
+      margin: 1px; }
 
 /*# sourceMappingURL=main.css.map*/

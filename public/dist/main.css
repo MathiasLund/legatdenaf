@@ -15,4 +15,27 @@
 .step1 {
   width: 33%; }
 
+.step2 {
+  width: 66%; }
+
+.step3 {
+  width: 100%; }
+
+.progress {
+  margin-top: 40px; }
+.logo {
+  max-width: 50%;
+  margin: 0 auto; }
+
+.box {
+  border-style: solid;
+  border-color: #BDBDBD;
+  text-align: center;
+  height: 300px;
+  align-items: center;
+  display: flex; }
+.header-title {
+  text-align: center;
+  margin: 40px; }
+
 /*# sourceMappingURL=main.css.map*/

@@ -17,6 +17,7 @@ export default class ProgressBar extends Component {
         case "step2":
           val = 66
           title = "2/3: Vælg uddannelse"
+          break;
         case "step3":
           val = 100
           title = "3/3: Vælg udvekslingsdestination"

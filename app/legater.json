@@ -1,0 +1,70 @@
+{
+  "legater": [
+    {
+      "name": "Jørgen Esmer Mindelegat",
+      "url": "http://www.esmer.dk/",
+      "deadline": "15. februar",
+      "tags": [
+        {
+          "university": "KU",
+          "destination": "USA"
+        }
+      ]
+    },
+    {
+      "name": "1000$ Fonden",
+      "url": "http://www.rebildfesten.dk/legater-fonde/",
+      "deadline": "1. februar",
+      "tags": [
+        {
+          "university": "CBS",
+          "destination": "Australia"
+        }
+      ]
+    },
+    {
+      "name": "DJØF Legat",
+      "url": "https://www.djoef.dk/studerende/studiejob-og-praktikophold/dj-oe-fs-rejselegat.aspx",
+      "deadline": "21. maj",
+      "tags": [
+        {
+          "university": "KU",
+          "destination": "Australia"
+        }
+      ]
+    },
+    {
+      "name": "Tranes Fond",
+      "url": "http://www.tranesfond.dk/",
+      "deadline": "30. oktober",
+      "tags": [
+        {
+          "university": "KU",
+          "destination": "USA"
+        }
+      ]
+    },
+    {
+      "name": "Lægeforeningen",
+      "url": "http://www.laeger.dk/portal/page/portal/LAEGERDK/Laegerdk/R%C3%A5dgivning%20og%20regler/R%C3%A5dgivning/Socialraadgiver",
+      "deadline": "15. marts",
+      "tags": [
+        {
+          "university": "KU",
+          "destination": "Australia"
+        }
+      ]
+    },
+    {
+      "name": "Henry Shaw's Legat",
+      "url": "http://www.shawslegat.dk/hvem.html",
+      "deadline": "1. maj",
+      "tags": [
+        {
+          "university": "CBS",
+          "destination": "USA"
+        }
+      ]
+    }
+  ]
+}

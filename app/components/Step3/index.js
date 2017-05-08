@@ -24,6 +24,7 @@ export default class Step3 extends Component {
 }
 
 window.addEventListener('WorldMapClicked', function(e) {
+  localStorage.setItem('region', e.detail.clickedState);
   window.setTimeout(function(){
         window.location.href = '/step4';
     }, 500);

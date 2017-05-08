@@ -6,6 +6,7 @@ import Header from '../Header'
 import List from '../List'
 
 export default class Step2 extends Component {
+
     render() {
         return (
         <div>

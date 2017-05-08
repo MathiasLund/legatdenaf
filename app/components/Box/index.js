@@ -4,13 +4,16 @@ import styles from './style.scss'
 
 export default class Box extends Component {
 
+  click(e) {
+    localStorage.setItem('uni', e.target.dataset.title);
+    window.location.href = '/step2'
+  }
+
   render() {
       return (
-        <a href="/step2">
-          <div className="col-lg-4 box">
-            <img className="logo" src="http://studenterhuset.com/wp-content/uploads/2016/05/KU-LOGO-web-1024x1022.jpg" />
-          </div>
-        </a>
+        <div onClick={this.click} className="col-lg-4 box" data-title={this.props.title}>
+          <img className="logo" src={this.props.url} data-title={this.props.title} />
+        </div>
       )
   }
 }
